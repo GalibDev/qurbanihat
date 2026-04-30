@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "Deshi Shahi Cow",
+    "type": "Cow",
+    "breed": "Local Deshi",
+    "price": 120000,
+    "weight": 280,
+    "age": 3,
+    "location": "Bogura",
+    "description": "Healthy deshi cow suitable for Qurbani. Well fed with natural food.",
+    "image": "/images/cow1.png",
+    "category": "Large Animal"
+  },
+  {
+    "id": 2,
+    "name": "Black Bengal Goat",
+    "type": "Goat",
+    "breed": "Black Bengal",
+    "price": 28000,
+    "weight": 35,
+    "age": 2,
+    "location": "Kushtia",
+    "description": "Strong and healthy goat, perfect for Qurbani.",
+    "image": "/images/goat1.png",
+    "category": "Small Animal"
+  },
+  {
+    "id": 3,
+    "name": "Australian Red Cow",
+    "type": "Cow",
+    "breed": "Australian",
+    "price": 185000,
+    "weight": 420,
+    "age": 4,
+    "location": "Dhaka",
+    "description": "Premium quality cow with excellent health condition.",
+    "image": "/images/cow2.png",
+    "category": "Large Animal"
+  },
+  {
+    "id": 4,
+    "name": "Jamnapari Goat",
+    "type": "Goat",
+    "breed": "Jamnapari",
+    "price": 45000,
+    "weight": 48,
+    "age": 2,
+    "location": "Rajshahi",
+    "description": "Beautiful Jamnapari goat with good weight and height.",
+    "image": "/images/goat2.png",
+    "category": "Small Animal"
+  },
+  {
+    "id": 5,
+    "name": "Sahiwal Bull",
+    "type": "Cow",
+    "breed": "Sahiwal",
+    "price": 210000,
+    "weight": 500,
+    "age": 5,
+    "location": "Rangpur",
+    "description": "Large Sahiwal bull, well maintained and suitable for Qurbani.",
+    "image": "/images/cow1.png",
+    "category": "Large Animal"
+  },
+  {
+    "id": 6,
+    "name": "Local Healthy Goat",
+    "type": "Goat",
+    "breed": "Local",
+    "price": 22000,
+    "weight": 30,
+    "age": 1.5,
+    "location": "Sylhet",
+    "description": "Affordable and healthy local goat.",
+    "image": "/images/goat1.png",
+    "category": "Small Animal"
+  }
+]
