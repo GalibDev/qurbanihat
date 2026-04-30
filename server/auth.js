@@ -23,9 +23,10 @@ export const auth = betterAuth({
 
   trustedOrigins: [
     "http://localhost:5173",
+    "https://qurbanihat-six.vercel.app",
     process.env.CLIENT_URL || "",
   ],
 
-  secret: process.env.BETTER_AUTH_SECRET || "qurbanihat-super-secret-key",
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:5000",
+  secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL,
 });
