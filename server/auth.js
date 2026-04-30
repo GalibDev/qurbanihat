@@ -8,8 +8,24 @@ export const auth = betterAuth({
     enabled: true,
   },
 
-  trustedOrigins: ["http://localhost:5173"],
+  user: {
+    changeEmail: {
+      enabled: false,
+    },
+  },
 
-  secret: "qurbanihat-super-secret-key",
-  baseURL: "http://localhost:5000",
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    },
+  },
+
+  trustedOrigins: [
+    "http://localhost:5173",
+    process.env.CLIENT_URL || "",
+  ],
+
+  secret: process.env.BETTER_AUTH_SECRET || "qurbanihat-super-secret-key",
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:5000",
 });
