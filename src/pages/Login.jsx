@@ -28,7 +28,7 @@ const Login = () => {
       }
 
       toast.success("Login successful");
-      navigate("/");
+       window.location.href = "/";
     } catch (err) {
       console.log("LOGIN ERROR:", err);
       toast.error("Server error");

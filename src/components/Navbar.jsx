@@ -2,10 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import { authClient } from "../lib/auth-client";
 
 const Navbar = () => {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
 
   const handleLogout = async () => {
     await authClient.signOut();
+    window.location.href = "/";
   };
 
   const linkClass = ({ isActive }) =>
@@ -24,12 +25,19 @@ const Navbar = () => {
         </Link>
 
         <div className="flex flex-wrap justify-center items-center gap-5">
-          <NavLink to="/" className={linkClass}>Home</NavLink>
-          <NavLink to="/animals" className={linkClass}>All Animals</NavLink>
+          <NavLink to="/" className={linkClass}>
+            Home
+          </NavLink>
 
-          {session?.user ? (
+          <NavLink to="/animals" className={linkClass}>
+            All Animals
+          </NavLink>
+
+          {!isPending && session?.user ? (
             <>
-              <NavLink to="/my-profile" className={linkClass}>My Profile</NavLink>
+              <NavLink to="/my-profile" className={linkClass}>
+                My Profile
+              </NavLink>
 
               <img
                 src={session.user.image || "/images/goat1.png"}
@@ -45,15 +53,20 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <>
-              <NavLink to="/login" className={linkClass}>Login</NavLink>
-              <Link
-                to="/register"
-                className="bg-amber-400 hover:bg-amber-500 text-green-950 px-5 py-2 rounded-full font-bold"
-              >
-                Register
-              </Link>
-            </>
+            !isPending && (
+              <>
+                <NavLink to="/login" className={linkClass}>
+                  Login
+                </NavLink>
+
+                <Link
+                  to="/register"
+                  className="bg-amber-400 hover:bg-amber-500 text-green-950 px-5 py-2 rounded-full font-bold"
+                >
+                  Register
+                </Link>
+              </>
+            )
           )}
         </div>
       </div>
