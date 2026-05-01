@@ -33,6 +33,6 @@ export const auth = betterAuth({
     httpOnly: true,
   },
 
-  secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL,
+  secret: process.env.BETTER_AUTH_SECRET || "qurbanihat-super-secret-key",
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:5000",
 });
