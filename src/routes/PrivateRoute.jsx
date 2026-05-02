@@ -3,14 +3,20 @@ import { authClient } from "../lib/auth-client";
 import Loading from "../components/Loading";
 
 const PrivateRoute = ({ children }) => {
-  const { data: session, isPending } = authClient.useSession();
   const location = useLocation();
+  const { data: session, isPending } = authClient.useSession();
 
-  if (isPending) {
+  const savedUser = localStorage.getItem("qurbanihat-user")
+    ? JSON.parse(localStorage.getItem("qurbanihat-user"))
+    : null;
+
+  const user = session?.user || savedUser;
+
+  if (isPending && !savedUser) {
     return <Loading />;
   }
 
-  if (!session?.user) {
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
