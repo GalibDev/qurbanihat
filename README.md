@@ -67,8 +67,7 @@ BETTER_AUTH_URL=http://localhost:5000
 
 ## Installation
 
-git clone https://github.com/your-username/qurbanihat.git
-
+git clone 
 cd qurbanihat
 npm install
 npm run dev
