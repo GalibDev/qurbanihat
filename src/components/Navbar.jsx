@@ -4,7 +4,14 @@ import { authClient } from "../lib/auth-client";
 const Navbar = () => {
   const { data: session, isPending } = authClient.useSession();
 
+  const savedUser = localStorage.getItem("qurbanihat-user")
+    ? JSON.parse(localStorage.getItem("qurbanihat-user"))
+    : null;
+
+  const user = session?.user || savedUser;
+
   const handleLogout = async () => {
+    localStorage.removeItem("qurbanihat-user");
     await authClient.signOut();
     window.location.href = "/";
   };
@@ -33,14 +40,14 @@ const Navbar = () => {
             All Animals
           </NavLink>
 
-          {!isPending && session?.user ? (
+          {!isPending && user ? (
             <>
               <NavLink to="/my-profile" className={linkClass}>
                 My Profile
               </NavLink>
 
               <img
-                src={session.user.image || "/images/goat1.png"}
+                src={user.image || "/images/goat1.png"}
                 alt="user"
                 className="w-10 h-10 rounded-full object-cover border-2 border-amber-300"
               />

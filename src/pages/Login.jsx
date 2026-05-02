@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { authClient } from "../lib/auth-client";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +16,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const { error } = await authClient.signIn.email({
+      const { data, error } = await authClient.signIn.email({
         email,
         password,
       });
@@ -27,8 +26,12 @@ const Login = () => {
         return;
       }
 
+      if (data?.user) {
+        localStorage.setItem("qurbanihat-user", JSON.stringify(data.user));
+      }
+
       toast.success("Login successful");
-       window.location.href = "/";
+      window.location.href = "/";
     } catch (err) {
       console.log("LOGIN ERROR:", err);
       toast.error("Server error");
