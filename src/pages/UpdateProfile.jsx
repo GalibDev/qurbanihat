@@ -1,71 +1,71 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { authClient } from "../lib/auth-client";
 
 const UpdateProfile = () => {
-  const { data: session } = authClient.useSession();
   const navigate = useNavigate();
 
-  const [name, setName] = useState(session?.user?.name || "");
-  const [image, setImage] = useState(session?.user?.image || "");
-  const [loading, setLoading] = useState(false);
+  const savedUser = localStorage.getItem("qurbanihat-user")
+    ? JSON.parse(localStorage.getItem("qurbanihat-user"))
+    : null;
 
-  const handleUpdate = async (e) => {
+  const [name, setName] = useState(savedUser?.name || "");
+  const [image, setImage] = useState(savedUser?.image || "");
+
+  const handleUpdate = (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    const { error } = await authClient.updateUser({
-      name,
-      image,
-    });
-
-    setLoading(false);
-
-    if (error) {
-      toast.error(error.message || "Update failed");
+    if (!savedUser) {
+      toast.error("Unauthorized");
       return;
     }
 
+    const updatedUser = {
+      ...savedUser,
+      name,
+      image,
+    };
+
+    localStorage.setItem("qurbanihat-user", JSON.stringify(updatedUser));
+
     toast.success("Profile updated successfully");
-    navigate("/my-profile");
+    window.location.href = "/my-profile";
   };
 
   return (
-    <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4 py-10">
-      <form
-        onSubmit={handleUpdate}
-        className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full space-y-4"
-      >
-        <h2 className="text-3xl font-bold text-green-700 text-center">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-amber-50">
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
+        <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
           Update Information
         </h2>
 
-        <input
-          type="text"
-          placeholder="New Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full border px-4 py-3 rounded-lg"
-          required
-        />
+        <form onSubmit={handleUpdate} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Name"
+            required
+            className="w-full border px-4 py-3 rounded-lg"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-        <input
-          type="url"
-          placeholder="New Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          className="w-full border px-4 py-3 rounded-lg"
-          required
-        />
+          <input
+            type="text"
+            placeholder="Image URL"
+            required
+            className="w-full border px-4 py-3 rounded-lg"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
 
-        <button
-          disabled={loading}
-          className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold"
-        >
-          {loading ? "Updating..." : "Update Information"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold"
+          >
+            Update Information
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
