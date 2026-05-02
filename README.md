@@ -13,8 +13,7 @@
 
 ## ⚠️ Notes
 
-- No email verification (as per assignment instruction)
-- Booking data is not stored (only success message shown)
+
 - SPA routing handled properly (no reload errors)
 
 ---
